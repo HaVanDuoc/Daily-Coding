@@ -8,6 +8,10 @@ Follow-up: what if you can't use division?
 
 // fill() là phương thức thay đổi giá trị mảng có 3 đối số fill(giá trị thay thế, start index default 0, end index default array max lenght)
 
+/*
+Mấu bài nắm được thằng temp
+ */
+
 const productArray = (arr, arrLength) => {
     let i, temp;
 
@@ -17,25 +21,30 @@ const productArray = (arr, arrLength) => {
         return;
     }
 
-    // Mảng chứa giá trị sản phẩm
+    // Tạo mảng chứa giá trị product
     let prod = Array(arrLength).fill(1);
-    temp = 1;
 
+    temp = 1;
     for (i = 0; i < arrLength; i++) {
-        prod[i] = temp;
-        temp *= arr[i];
+        prod[i] = temp; // có thể hiểu là thay cho giá trị của index prod[0] = 1
+        temp *= arr[i]; // temp ở đây chính là tích các giá trị trước index sau đó được gán vào prod[i]
+
+        // console.log(`prod[${i}] ` + prod[i]); // prod[index] chính là tích các số trước nó
     }
-    console.log(prod);
 
     temp = 1;
 
+    // Vòng lặp này sẽ duyệt từ cuối mảng
     for (i = arrLength - 1; i >= 0; i--) {
         prod[i] *= temp;
-        console.log(`prod[${i}] ` + prod);
         temp *= arr[i];
-        // prod[4] = 24 * 1 = 24     temp = 1 * 5 = 5
-        // prod[3] = 6 * 5 = 30     temp = 1 * 5 = 5
-        // prod[2] = 2 * 5 = 30     temp = 1 * 5 = 5
+
+        /* temp ở đây khác vòng lặp trên nó chứa tích các giá trị sau index 
+        ví dụ temp = 1 prod[4] thì temp = temp * 5 và prod[3] thì temp = temp(chính là temp = temp * 5) * 4 
+        có thể hiểu temp này chính là tích các giá trị sau index 
+        và sau cùng prod[i] = prod[i] (cũng chính là tích các số trước index được tính trong vòng lặp trước) + temp (tích các số sau index) */
+
+        // console.log(`prod[${i}] ` + prod[i]);
     }
 
     for (i = 0; i < arrLength; i++) console.log(prod[i]);
